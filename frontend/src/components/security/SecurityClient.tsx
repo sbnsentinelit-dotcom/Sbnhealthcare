@@ -1,0 +1,245 @@
+'use client';
+
+import React from 'react';
+import { motion } from 'framer-motion';
+import Link from 'next/link';
+import Image from 'next/image';
+import { useLanguage } from '@/context/LanguageContext';
+
+const fadeUp: any = {
+    hidden: { opacity: 0, y: 30 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: "easeOut" } }
+};
+
+export default function SecurityClient() {
+    const { t } = useLanguage();
+
+    const securityData = (t('security_page.securityData') as any) || [];
+    const takeaways = (t('security_page.takeaways') as any) || [];
+    const faqs = (t('security_page.faqs') as any) || [];
+
+    return (
+        <div className="bg-[#f8faff] relative selection:bg-[#0033e7] selection:text-white">
+            {/* Custom Premium Security Hero (Light Theme) */}
+            <section className="pt-32 pb-16 md:pt-40 md:pb-24 text-center px-4 relative overflow-hidden">
+                <Image
+                    src="/background image.webp"
+                    alt="Background"
+                    fill
+                    className="object-cover object-center pointer-events-none -z-10"
+                    priority
+                />
+                <div className="absolute inset-0 bg-[#f8faff]/90 pointer-events-none z-0"></div>
+                {/* Security Glowing Orbs */}
+                <div className="absolute inset-0 pointer-events-none overflow-hidden z-0">
+                    <div className="absolute top-[-10%] right-[15%] w-[600px] h-[600px] bg-[#0033e7]/20 rounded-full blur-[120px] mix-blend-multiply"></div>
+                    <div className="absolute bottom-[-20%] left-[5%] w-[500px] h-[500px] bg-teal-500/10 rounded-full blur-[100px] mix-blend-multiply"></div>
+                    {/* Minimal Grid Overlay */}
+                    <div className="absolute inset-0 bg-[linear-gradient(rgba(0,51,231,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(0,51,231,0.03)_1px,transparent_1px)] bg-[size:40px_40px]"></div>
+                </div>
+                
+                <div className="w-full px-6 lg:px-12 2xl:px-20 max-w-4xl mx-auto relative z-10">
+                    <motion.div
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.8 }}
+                    >
+                        <div className="inline-flex items-center gap-2 bg-blue-50 border border-blue-200 text-[#0033e7] font-bold uppercase text-[11px] tracking-[3px] mb-8 px-5 py-2 rounded-full shadow-sm">
+                            <span className="w-2 h-2 bg-[#0033e7] rounded-full animate-pulse shadow-[0_0_10px_rgba(0,51,231,0.5)]"></span>
+                            {t('security_page.tag')}
+                        </div>
+                        <h1 className="text-4xl md:text-[3.5rem] lg:text-[4rem] font-extrabold text-slate-900 leading-[1.1] mb-6 tracking-tight">
+                            {t('security_page.title')}
+                        </h1>
+                        <p className="text-[17px] md:text-[19px] text-slate-600 font-medium leading-[1.7] max-w-2xl mx-auto">
+                            {t('security_page.desc')}
+                        </p>
+                    </motion.div>
+                </div>
+            </section>
+
+            {/* Introduction Section */}
+            <section className="py-20 lg:py-24 relative border-b border-blue-50/50">
+                <Image
+                    src="/background image.webp"
+                    alt="Background"
+                    fill
+                    className="object-cover object-center pointer-events-none -z-10"
+                />
+                <div className="absolute inset-0 bg-gradient-to-br from-white/95 to-[#f8faff]/90 pointer-events-none z-0"></div>
+                <div className="w-full px-6 lg:px-12 2xl:px-20 relative z-10">
+                        <motion.div 
+                            initial="hidden"
+                            whileInView="visible"
+                            viewport={{ once: true, margin: "-50px" }}
+                            variants={fadeUp}
+                            className="bg-white/80 backdrop-blur-xl border border-white p-10 md:p-16 rounded-2xl shadow-[0_20px_60px_rgba(0,51,231,0.06)] max-w-4xl mx-auto text-center relative overflow-hidden group"
+                        >
+                            <div className="absolute top-0 right-0 w-64 h-64 bg-blue-100/50 rounded-full blur-[80px] -mr-32 -mt-32 transition-transform duration-700 group-hover:scale-150 pointer-events-none"></div>
+                            
+                            <h2 className="text-3xl md:text-5xl font-black text-slate-900 leading-[1.15] mb-8 tracking-tight relative z-10">
+                                {t('security_page.intro_title')}
+                            </h2>
+                            <div className="mx-auto relative z-10 space-y-6 text-slate-700 text-lg font-medium">
+                                <p>
+                                    {t('security_page.intro_p1')}
+                                </p>
+                                <p>
+                                    {t('security_page.intro_p2')}
+                                </p>
+                                <div className="mt-8">
+                                    <Link href="/contact-us" className="inline-block bg-[#0033e7] text-white px-8 py-4 rounded-xl font-bold uppercase tracking-[2px] hover:bg-blue-800 transition-all shadow-lg hover:-translate-y-1 hover:shadow-[0_10px_20px_rgba(0,51,231,0.3)]">
+                                        {t('security_page.intro_btn')}
+                                    </Link>
+                                </div>
+                            </div>
+                        </motion.div>
+                    </div>
+                </section>
+
+                {/* Core Pillars Grid */}
+                <section className="py-20 relative bg-cover bg-center" style={{ backgroundImage: 'url("/background%20image.webp")' }}>
+                    <div className="absolute inset-0 bg-white/90 pointer-events-none z-0"></div>
+                    <div className="w-full px-6 lg:px-12 2xl:px-20  relative z-10">
+                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                            {securityData && Array.isArray(securityData) && securityData.map((item: any, idx: number) => (
+                                <motion.div 
+                                    key={idx}
+                                    initial="hidden" whileInView="visible" viewport={{ once: true }}
+                                    variants={{ hidden: { opacity: 0, y: 30 }, visible: { opacity: 1, y: 0, transition: { duration: 0.6, delay: (idx % 3) * 0.1 } } } as any}
+                                    className="bg-white/95 backdrop-blur-sm p-8 rounded-2xl shadow-[0_15px_40px_rgba(0,0,0,0.04)] border border-white relative group transition-all duration-500 hover:-translate-y-2 hover:shadow-[0_30px_60px_rgba(0,51,231,0.08)] flex flex-col h-full"
+                                >
+                                    <h3 className="text-[22px] font-black text-slate-900 mb-4 tracking-tight leading-[1.3] group-hover:text-[#0033e7] transition-colors">
+                                        {item?.title}
+                                    </h3>
+                                    <p className="text-slate-600 leading-relaxed font-medium mb-6 text-[15px]">
+                                        {item?.desc}
+                                    </p>
+                                    <div className="space-y-4 mb-6 flex-grow">
+                                        {item?.points && item.points.map((point: any, pIdx: number) => (
+                                            <div key={pIdx} className="flex gap-3">
+                                                <div className="mt-1 flex-shrink-0 text-teal-500">
+                                                    <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor"><path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd"></path></svg>
+                                                </div>
+                                                <div>
+                                                    <strong className="block text-slate-800 text-[14px]">{point?.t}</strong>
+                                                    <span className="text-slate-500 text-[13px]">{point?.p}</span>
+                                                </div>
+                                            </div>
+                                        ))}
+                                    </div>
+                                    <div className="pt-5 border-t border-slate-100 text-[13px] text-slate-500 font-medium italic select-none">
+                                        {item?.footer}
+                                    </div>
+                                </motion.div>
+                            ))}
+                        </div>
+                    </div>
+                </section>
+
+                {/* Security Scope & Responsible Disclosure */}
+                <section className="py-20 relative bg-white border-t border-slate-100" id="report-security-concern">
+                    <div className="w-full px-6 lg:px-12 2xl:px-20 max-w-4xl mx-auto">
+                        <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} className="prose prose-lg prose-slate max-w-none">
+                            <div className="flex justify-between items-end mb-8 border-b border-slate-200 pb-4">
+                                <h2 className="text-3xl font-black text-slate-900 m-0 tracking-tight">Security Scope & Application</h2>
+                                <div className="text-sm font-medium text-slate-500 text-right">
+                                    <div>Last Revised: October 2026</div>
+                                    <div className="text-xs">Prior Version: September 2026 (Approved by Compliance)</div>
+                                </div>
+                            </div>
+
+                            <p className="text-slate-700 font-medium leading-relaxed">
+                                This security overview applies distinctly across our different operational boundaries:
+                            </p>
+                            <ul className="space-y-3 mt-4 text-slate-700 font-medium">
+                                <li><strong>Public Marketing Website:</strong> Hosted independently. No patient data or PHI is collected, processed, or stored on this platform.</li>
+                                <li><strong>Contracted Billing Services:</strong> Operations are governed by individual Business Associate Agreements (BAAs). Access is strictly restricted to authorized personnel operating within secure, compliant environments where appropriate.</li>
+                                <li><strong>SBN Sentinel:</strong> Operates as a distinct application. Sentinel retrieves only practice-authorized data for operational reporting and does not modify source records in external EHR systems.</li>
+                            </ul>
+
+                            <h3 className="text-2xl font-bold text-slate-900 mt-12 mb-6">Report a Security Concern</h3>
+                            <div className="bg-blue-50/50 p-6 rounded-xl border border-blue-100">
+                                <p className="text-slate-700 font-medium mb-4">
+                                    If you believe you have discovered a potential security vulnerability or concern, please report it to our security team. We value the efforts of security researchers and will review all legitimate reports.
+                                </p>
+                                <p className="text-slate-800 font-bold mb-4">
+                                    Contact: <a href="mailto:info@sbnhealthcaresolution.com" className="text-[#0033e7] hover:underline">info@sbnhealthcaresolution.com</a>
+                                </p>
+                                <div className="bg-amber-50 border-l-4 border-amber-500 p-4 rounded-r-lg mt-6">
+                                    <p className="text-amber-800 text-sm font-bold m-0">Important Reporting Guidelines:</p>
+                                    <ul className="text-amber-700 text-sm mt-2 mb-0 space-y-1 list-disc pl-4">
+                                        <li>Do NOT include patient records, PHI, passwords, private keys, or active tokens in your report. Use redacted evidence.</li>
+                                        <li>Provide a technical description of the issue and steps to reproduce (if applicable).</li>
+                                        <li>Reporting a concern does NOT authorize disruptive testing, DDoS attacks, or unauthorized access to our systems.</li>
+                                        <li>We review all reports, but we do not provide a guaranteed response-time promise for initial triage.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </motion.div>
+                    </div>
+                </section>
+
+                {/* Sub-sections Bottom: Takeaways & FAQ */}
+                <section className="py-20 lg:py-28 relative border-t border-blue-50/50 bg-cover bg-center" style={{ backgroundImage: 'url("/background%20image.webp")' }}>
+                    <div className="absolute inset-0 bg-[#f8faff]/85 backdrop-blur-sm pointer-events-none z-0"></div>
+                    <div className="w-full px-6 lg:px-12 2xl:px-20 max-w-6xl mx-auto relative z-10">
+                        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
+                            
+                            {/* Quick Takeaways */}
+                            <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp}>
+                                <div className="bg-[#0033e7] rounded-3xl p-10 md:p-14 text-white shadow-[0_20px_50px_rgba(0,51,231,0.2)] relative overflow-hidden h-full">
+                                    <div className="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full blur-[60px] -mr-32 -mt-32 pointer-events-none"></div>
+                                    <h3 className="text-3xl font-black mb-8 relative z-10 tracking-tight text-white">{t('security_page.takeaways_title')}</h3>
+                                    <ul className="space-y-6 relative z-10">
+                                        {takeaways && Array.isArray(takeaways) && takeaways.map((item: any, idx: number) => (
+                                            <li key={idx} className="flex items-center gap-4 text-lg font-medium">
+                                                <div className="w-8 h-8 rounded-full bg-white/20 flex items-center justify-center flex-shrink-0">
+                                                    <svg width="16" height="16" viewBox="0 0 20 20" fill="currentColor"><path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd"></path></svg>
+                                                </div>
+                                                {item}
+                                            </li>
+                                        ))}
+                                    </ul>
+                                </div>
+                            </motion.div>
+
+                            {/* FAQs */}
+                            <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp}>
+                                <div className="h-full">
+                                    <h3 className="text-3xl font-black text-slate-900 mb-8 tracking-tight">{t('security_page.faq_title')}</h3>
+                                    <div className="space-y-6">
+                                        {faqs && Array.isArray(faqs) && faqs.map((faq: any, idx: number) => (
+                                            <div key={idx} className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 border border-white shadow-sm hover:shadow-md transition-shadow">
+                                                <h4 className="text-lg font-extrabold text-slate-900 mb-2">{faq?.q}</h4>
+                                                <p className="text-slate-600 font-medium">{faq?.a}</p>
+                                            </div>
+                                        ))}
+                                    </div>
+                                </div>
+                            </motion.div>
+
+                        </div>
+                    </div>
+                </section>
+
+                {/* Final CTA */}
+                <section className="pt-10 pb-20 relative bg-cover bg-center" style={{ backgroundImage: 'url("/background%20image.webp")' }}>
+                   <div className="absolute inset-0 bg-white/90 backdrop-blur-sm pointer-events-none z-0"></div>
+                   <div className="w-full px-6 lg:px-12 2xl:px-20 max-w-4xl mx-auto text-center relative z-10">
+                        <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp}>
+                            <h2 className="text-4xl font-extrabold text-slate-900 leading-[1.2] tracking-tight mb-6">
+                                {t('security_page.cta_title')}
+                            </h2>
+                            <p className="text-xl text-slate-600 font-medium mb-10 max-w-2xl mx-auto">
+                                {t('security_page.cta_desc')}
+                            </p>
+                            <Link href="/contact-us" className="inline-block bg-teal-500 text-white px-10 py-5 rounded-xl font-black uppercase tracking-[2px] transition-all hover:bg-teal-600 hover:-translate-y-1 hover:shadow-[0_15px_30px_rgba(20,184,166,0.3)] shadow-xl">
+                                {t('security_page.cta_btn')}
+                            </Link>
+                        </motion.div>
+                   </div>
+                </section>
+        </div>
+    );
+}
